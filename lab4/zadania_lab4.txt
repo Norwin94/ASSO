@@ -1,0 +1,42 @@
+3. Ustawianie zapory sieciowej
+W tej czesci bedziemy odwzorowywac sytuacje identyczn¹ do tej z zajec nr 3 (punkt 4) - taka w ktorej polaczylismy dwa komputery za pomoca osprzetu sieciowego.
+
+Naszym ostatecznym zadaniem bedzie skomunikowanie maszyn oraz odpowiednie przefiltrowanie ruchu sieciowego. Aby tego dokonac, nalezy maszynom ustawic adresy IP oraz podniesc interfejsy. Jesli adresacja jest poprawna, wszystko powinno byc ok i maszyny powinny sie wzajemnie pingowac. Dalej, nalezalo bedzie odpowiednimi wywolaniami polecenia iptables wprowadzac/usuwac odpowiednie reguly.
+
+Zadania
+Upewnic sie, ze mamy polaczenie z internetem ping 8.8.8.8 - jesli maszyna zostala stworzona w domu moze byc problem z DNSami
+Ustawic statycznie adresy IP na maszynach A i B tak aby maszyny sie wzajemnie ping-owaly oraz nawiazywaly polaczenia TCP/UDP za pomoca netcata nc - tak jak na zeszlych zajeciach
+Na maszynie A zablokowac ruch TCP na porcie 12345 i udowodnic to za pomoca netcat-a nc
+Na maszynie A zablokowac caly ruch UDP i przetestowac netcat-em
+Zainstalowac lynx i upewnic sie, ze mozemy wejsc na onet.pl oraz interia.pl, nastepnie zablokowac ruch TCP do onet.pl tak zeby lynx w jego przypadku nie dzialal, ale dzialal w przypadku interia.pl
+Zablokowac mozliwosc pingowania sie maszyn
+Po wykonaniu wszystkich zadan, niezwlocznie zglosic i pokazac prowadzacemu przed przejsciem dalej.
+
+5. Konfiguracja routing-u
+W tej czesci bedziemy odwzorowywac sytuacje w ktorej polaczylibysmy trzy komputery w lancuchu (chain) poprzez dwie oddzielne sieci.
+
+UWAGA! Zalecam usunac stare maszyny z poprzednich zadan i stworzyc nowe.
+
+Aby uzyskac pozadana konfiguracje bedziemy potrzebowac trzech maszyn; A, R oraz B kazda z nastepujacymi adapterami sieciowymi:
+
+A - Internal Network (net1)
+R - Internal Network (net1) oraz Internal Network (net2) (kolejnosc adapterow ma znaczenie)
+B - Internal Network (net2)
+Sytuacje mozna zobrazowac w ten sposob:
+
+[A]<---net1--->[R]<---net2--->[B]
+Prosze nie zapomniec o podlaczeniu kabla w zaawansowanych.
+
+Nastepnie:
+
+Na interfejsach enp0s8 maszyn A oraz R nalezy ustawic statycznie adresy IP z jakiejs sieci (nazwijmy ja X)
+Na interfejsie enp0s9 maszyny R nalezy ustawic statycznie adres IP z innej sieci (nazwijmy ja Y)
+Na interfejsie enp0s8 maszyny B nalezy ustawic statycznie inny adres IP z sieci Y
+Zadania
+Upewnic sie, ze mamy polaczenie z internetem ping 8.8.8.8 - jesli maszyna zostala stworzona w domu moze byc problem z DNSami
+Upewnic sie, ze maszyny A oraz R pinguja sie w zakresie sieci X
+Upewnic sie, ze maszyny B oraz R pinguja sie w zakresie sieci Y
+Upewnic sie, ze maszyny A oraz B nie pinguja sie
+Sprawic aby maszyna R zadzialala jak router - maszyny A i B powinny sie za jej posrednictwem pingowac (bedac w innych podsieciach). Dokonac tego mozna poprzez ustawienie odpowiedniego routingu na maszynach A i B oraz wlaczenie trybu forwardowania pakietow miedzy interfejsami na maszynie R
+Zainstalowac tcpdump
+Na maszynie R wlaczyc dump-owanie ruchu tcp (tcpdump -i any -X | tee plik.txt). Nastepnie przeslac bajty z maszyny A do B za pomoca netcat-a. Na koniec, na maszynie R zweryfikowac zawartosc pliku plik.txt

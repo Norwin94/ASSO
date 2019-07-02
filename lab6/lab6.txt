@@ -1,0 +1,69 @@
+3.
+	1 
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+   1   2 3 4   5          6            7
+
+1 - nazwa u¿ytkownika
+2 - has³o
+3 - ID u¿ytkownika      
+4 - ID grupy
+5 - info o ID u¿ytkownika (mo¿na dodaæ inne informacje)
+6 - œcie¿ka, gdzie u¿ytkownik bêdzie po zalogowaniu
+7 - domyœlna pow³oka, zazwyczaj œcie¿ka do basha (jeœli jest napisane nologin - konto nie jest dostêpne)
+
+	2
+Sprawdzenie grup i u¿ytkowników przynale¿nych grupom istniej¹cych w systemie:
+cat etc/group
+
+	3 
+id student
+id root
+
+4. 
+	1. useradd NewUser
+	2. groupadd newGroup
+	3. useradd -G newGroup newUser
+	4. useradd -d /home/newUser newUser
+	5. useradd -s /bin/bash newUser
+	6. usermod -L student
+	7. passwd newUser (Enter password)
+	8. userdel newUser
+	9. usermod -G newGroup -a student
+
+5. 
+	1. chown root:student doc.txt
+	2. chmod 444 doc.txt
+	3. su
+	   mkdir newFolder
+	   touch newFolder/doc.txt
+	   
+	   chown student:student newFolder/doc.txt
+	   chmod 700 newFolder/doc.txt
+	   chmod 700 newFolder (dla roota)
+           Ctrl + D (wyjœcie z roota) 
+           cat newFolder/doc.txt   - permission denied | nie mo¿na
+	
+	4. su 
+	   mkdir newFolder
+	   touch newFolder/doc
+
+	   chown student:student newFolder
+	   chown student:student newFolder/doc
+	   chmod 600 newFolder
+	   chmod 600 newFolder/doc
+	   Ctrl + D (wyjœcie z roota)
+	
+	   wejœcie do katalogu: cd newFolder: permission denied
+	   listowanie katalogu: ls: mo¿na
+	   przeczytanie pliku: cat newFolder/doc: permission denied
+  	
+	5. 
+	   touch file
+	   chmod 421 file
+
+	6.
+	   cd /usr/bin/
+	   ls -l 
+	   passwd: -rwsr-xr-x
+	   passwd: root ma uprawnienia -s (setuid)
+	   Dziêki temu zwyk³y u¿ytkownik tak¿e mo¿e uruchomiæ komendê passwd (domyœlnie przypisana do root), przez co mo¿e np. zmieniæ sobie has³o

@@ -1,0 +1,37 @@
+3. Podstawowe informacje o uzytkownikach i grupach
+Aby uzyskac informacje o uzytkownikach oraz grupach w systemie, mozna skorzystac z szeregu plikow tekstowych takich jak /etc/passwd, /etc/group, /etc/shadow, /etc/gshadow lub polecen np id, finger (domyslne nie zainstalowane).
+
+Zadania
+Poszukac informacji tlumaczacych co oznaczaja kolejne kolumny w pliku /etc/passwd
+Sprawdzic jacy uzytkownicy oraz grupy istnieja w systemie
+Sprawdzic UID, GID oraz przynaleznosc do grup uzytkownikow student oraz root
+4. Zarzadzanie uzytkownikami i grupami
+Do zarzadzania uzytkownikami oraz grupami zaleca sie (zamiast recznej modyfikacji plikow konfiguracyjnych) uzycie polecen takich jak useradd, userdel, usermod, groupadd, groupdel, groupmod, passwd, gpasswd.
+
+Przelaczanie uzytkownikow jest mozliwe przy uzyciu polecenia su. Z kolei rownoczesne logowania mozna realizowac za pomoca wirtualnych terminali: Alt + -> - nastepny, Alt + <- - poprzedni.
+
+Zadania
+Dodac nowego uzytkownika
+Dodac nowa grupe
+Dodac nowego uzytkownika tak aby nalezal do grupy utworzonej wczesniej
+Dodac nowego uzytkownika z jednoczesnym stworzeniem katalogu domowego
+Dodac nowego uzytkownika tak aby jego domyslna powolka byl /bin/dash
+Zablokowac mozliwosc logowania uzytkownikowi student
+Zmienic haslo jednemu z nowo dodanych uzytkownikow
+Usunac jednego z nowo dodanych uzytkownikow
+Dodac uzytkownika student do jednej z nowo dodanych grup
+5. Zarzadzanie prawami dostepu
+Dostep do plikow i katalogow jest w najprostszym wariancie kontrolowany poprzez proste prawa ktore mozna zmieniac poleceniami takimi jak chmod, chown, chgrp, umask. Istnieje bardziej ogolny mechanizm - ACL, jednak nie bedzie on przedmiotem naszych rozwazan.
+
+Aby sprawdzic zestaw praw zwiazanych z danym plikiem/katalogiem, mozna skorzystac z polecenia ls z przelacznikiem -l np ls -l /etc/passwd.
+
+Zadania
+Stworzyc plik oraz sprawic aby przynalezal do uzytkownika root oraz grupy student
+Stworzyc plik tylko do odcztu (dla wszystkich uzytkownikow/grup)
+Stworzyc katalog, a w nim plik. Nadac uzytkownikowi student pelen dostep do pliku ale odebrac calkowicie dostep do katalogu. Na koniec sprawdzic, czy uzytkownik student moze odczytac plik
+Stworzyc katalog, a w nim plik. Nadac uzytkownikowi student pelen dostep do pliku oraz katalogu, ale w przypadku katalogu, dodatkowo usunac wszystkie wystapienia flagi x (executable). Na koniec sprawdzic:
+czy uzytkownik student moze wejsc do katalogu
+czy uzytkownik student moze wylistowac katalog
+czy uzytkownik student moze przeczytac plik
+Stworzyc plik i nadac mu prawa -r---w---x za pomoca polecenia chmod oraz numerycznej reprezentacji praw
+Sprawdzic i wytlumaczyc dlaczego plik /usr/bin/passwd ma takie a nie inne prawa dostepu

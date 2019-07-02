@@ -1,0 +1,18 @@
+-------------------------
+4)	       	 
+1. ip addr add 10.0.2.16/24  dev enp0s8 <10.0... - twoj addr w tej samej podsieci> <enp.. - interfejs>
+2. ip link set enp0s8 up
+3. ping <addr drugiej maszyny>
+4. nc -l -p 12345   <l - listen mode, dla polaczen przychodzacych, p - port>
+5. nc <addr drugiej amszyny> 12345 <i wyslac jakis tekst>
+
+5)
+1. ip addr add 10.0.2.16/24 dev enp0s8 | ip link set enp0s8 up
+2. apt install isc-dhcp-server
+3. <go to> /etc/default/isc-dhcp-server | <set> INTERFACES="enp0s8" 
+   <go to> /etc/dhcp/dhcpd.conf	 	|
+   <go to> https://www.tecmint.com/install-dhcp-server-in-ubuntu-debian/
+   Step 2, point 4 and 5
+4. A} tail -f /var/log/syslog
+   B} dhclient [nazwa interfejsu]
+   B} dhclient -r [nazwa interfejsu]
